@@ -116,52 +116,29 @@
 			<div class="section-title">
 				<div class="cata new">new</div>
 				<h2 style="color:white">Recent Reviews</h2>
-			</div>
+            </div>
 			<div class="row">
-				<div class="col-lg-3 col-md-6">
-					<div class="review-item">
-						<div class="review-cover set-bg" data-setbg="img/review/1.jpg">
-							<div class="score yellow">9.3</div>
-						</div>
-						<div class="review-text">
-							<h5 style="color:white"><b>Assasin’’s Creed</b></h5>
-							<p style="color:gainsboro">Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit ame.</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="review-item">
-						<div class="review-cover set-bg" data-setbg="img/review/1.jpg">
-							<div class="score yellow">9.3</div>
-						</div>
-						<div class="review-text">
-							<h5 style="color:white"><b>Assasin’’s Creed</b></h5>
-							<p style="color:gainsboro">Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit ame.</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="review-item">
-						<div class="review-cover set-bg" data-setbg="img/review/3.jpg">
-							<div class="score green">9.1</div>
-						</div>
-						<div class="review-text">
-							<h5>Overwatch</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit ame.</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="review-item">
-						<div class="review-cover set-bg" data-setbg="img/review/4.jpg">
-							<div class="score pink">9.7</div>
-						</div>
-						<div class="review-text">
-							<h5>GTA</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit ame.</p>
-						</div>
-					</div>
-				</div>
+                @forelse ($reviews as $review)
+                <div class="col-lg-3 col-md-6">
+                    <div class="review-item">
+                        <div class="review-cover set-bg" data-setbg="{{Storage::url('review/'.$review->image)}}">
+                            <div class="score yellow">{{ $review->score }}</div>
+                        </div>
+                        <div class="review-text">
+                            <h5 style="color:white"><b>{{ $review->title }}</b></h5>
+                            <p style="color:gainsboro">{{ $review->sh_review }}</p>
+                        </div>
+                    </div>
+                </div>
+                @empty
+                <div class="col-lg-12 col-md-12">
+                    <div class="card h-100">
+                        <div class="single-post post-style-1 p-2">
+                           <strong>No Post Found :(</strong>
+                        </div>
+                    </div>
+                </div>
+                @endforelse
 			</div>
 		</div>
 	</section>

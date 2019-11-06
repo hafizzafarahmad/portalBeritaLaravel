@@ -10,7 +10,7 @@
 @section('content')
     <div class="container-fluid">
         <!-- Vertical Layout | With Floating Label -->
-        <form action="{{ route('admin.post.update',$post->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.review.update',$review->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="row clearfix">
@@ -18,14 +18,21 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                EDIT POST
+                                EDIT REVIEW
                             </h2>
                         </div>
                         <div class="body">
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <input type="text" id="title" class="form-control" name="title" value="{{ $post->title }}">
-                                    <label class="form-label">Post Title</label>
+                                    <input type="text" id="title" class="form-control" name="title" value="{{ $review->title }}">
+                                    <label class="form-label">Title</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="text" id="sh_review" class="form-control" name="sh_review" value="{{ $review->sh_review }}">
+                                    <label class="form-label">Short Review</label>
                                 </div>
                             </div>
 
@@ -35,13 +42,15 @@
                             </div>
 
                             <div class="form-group">
-                                <input type="checkbox" id="publish" class="filled-in" name="status" value="1" {{ $post->status == true ? 'checked' : '' }}>
-                                <label for="publish">Publish</label>
+                                <input type="checkbox" id="featured" class="filled-in" name="featured" value="1" {{ $review->featured == true ? 'checked' : '' }}>
+                                <label for="featured">Featured</label>
                             </div>
 
-                            <div class="form-group">
-                                <input type="checkbox" id="featured" class="filled-in" name="featured" value="1" {{ $post->featured == true ? 'checked' : '' }}>
-                                <label for="featured">Featured</label>
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                <input type="number" id="score" class="form-control" name="score" value="{{ $review->score }}">
+                                    <label class="form-label">Score</label>
+                                </div>
                             </div>
 
                         </div>
@@ -51,7 +60,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                Categories and Tags
+                                Information
                             </h2>
                         </div>
                         <div class="body">
@@ -61,7 +70,7 @@
                                     <select name="categories[]" id="category" class="form-control show-tick" data-live-search="true" multiple>
                                         @foreach($categories as $category)
                                             <option
-                                                @foreach($post->categories as $postCategory)
+                                                @foreach($review->categories as $postCategory)
                                                     {{ $postCategory->id == $category->id ? 'selected' : '' }}
                                                 @endforeach
                                                 value="{{ $category->id }}">{{ $category->name }}</option>
@@ -71,21 +80,33 @@
                             </div>
 
                             <div class="form-group form-float">
-                                <div class="form-line {{ $errors->has('tags') ? 'focused error' : '' }}">
-                                    <label for="tag">Select Tags</label>
-                                    <select name="tags[]" id="tag" class="form-control show-tick" data-live-search="true" multiple>
-                                        @foreach($tags as $tag)
-                                            <option
-                                                    @foreach($post->tags as $postTag)
-                                                        {{ $postTag->id == $tag->id ? 'selected' :'' }}
-                                                    @endforeach
-                                                    value="{{ $tag->id }}">{{ $tag->name }}</option>
-                                        @endforeach
-                                    </select>
+                                <div class="form-line">
+                                    <input type="text" id="developer" class="form-control" name="developer" value="{{ $review->developer }}">
+                                    <label class="form-label">Developer</label>
                                 </div>
                             </div>
 
-                            <a  class="btn btn-danger m-t-15 waves-effect" href="{{ route('admin.category.index') }}">BACK</a>
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="text" id="platform" class="form-control" name="platform" value="{{ $review->platform }}">
+                                    <label class="form-label">Platform</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="text" id="genre" class="form-control" name="genre" value="{{ $review->genre }}">
+                                    <label class="form-label">Genre</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="date" id="release_date" class="form-control" name="release_date" value="{{ $review->release_date }}">
+                                </div>
+                            </div>
+
+                            <a  class="btn btn-danger m-t-15 waves-effect" href="{{ route('admin.review.index') }}">BACK</a>
                             <button type="submit" class="btn btn-primary m-t-15 waves-effect">SUBMIT</button>
 
                         </div>
@@ -101,7 +122,7 @@
                             </h2>
                         </div>
                         <div class="body">
-                            <textarea id="tinymce" name="body">{{ $post->body }}</textarea>
+                            <textarea id="tinymce" name="body">{{ $review->body }}</textarea>
                         </div>
                     </div>
                 </div>

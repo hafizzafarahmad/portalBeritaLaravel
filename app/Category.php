@@ -10,4 +10,9 @@ class Category extends Model
     {
         return $this->belongsToMany('App\Post')->withTimestamps();
     }
+
+    public function reviews()
+    {
+        return $this->belongsToMany('App\Review')->withTimestamps();
+    }
 }

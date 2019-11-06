@@ -15,6 +15,8 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('posts','PostController@index')->name('post.index');
 Route::get('post/{slug}','PostController@details')->name('post.details');
 
+Route::get('review/{slug}','ReviewController@details')->name('review.details');
+
 Route::get('/category/{slug}','PostController@postByCategory')->name('category.posts');
 Route::get('/tag/{slug}','PostController@postByTag')->name('tag.posts');
 
@@ -42,6 +44,7 @@ Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'
     Route::resource('tag','TagController');
     Route::resource('category','CategoryController');
     Route::resource('post','PostController');
+    Route::resource('review','ReviewController');
 
     Route::get('/pending/post','PostController@pending')->name('post.pending');
     Route::put('/post/{id}/approve','PostController@approval')->name('post.approve');

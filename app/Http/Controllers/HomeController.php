@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Post;
+use App\Review;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,6 +25,7 @@ class HomeController extends Controller
         $categories = Category::all();
         $featureds = Post::latest()->approved()->published()->featured()->take(4)->get();
         $posts = Post::latest()->approved()->published()->take(6)->get();
-        return view('welcome',compact('categories','posts','featureds'));
+        $reviews = Review::latest()->take(4)->get();
+        return view('welcome',compact('categories','posts','featureds','reviews'));
     }
 }
